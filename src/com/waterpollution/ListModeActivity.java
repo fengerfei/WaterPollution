@@ -27,6 +27,12 @@ import com.waterpollution.vo.ComplaintEntity;
 import com.waterpollution.vo.ListModeVo;
 import com.waterpollution.vo.RequestVo;
 
+
+
+
+
+
+
 public class ListModeActivity extends BaseActivity {
 
 	private Spinner spnRange;
