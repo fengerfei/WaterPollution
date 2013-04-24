@@ -80,10 +80,12 @@ public class ListModeActivity extends BaseActivity {
 		map.put("latitude", String.valueOf(latitude));
 		map.put("range", String.valueOf(km));
 		vo.requestDataMap = map;
-		List<ListModeVo> data = (List<ListModeVo>)NetUtil.get(vo);
 		List<ListModeVo> newData = new ArrayList<ListModeVo>();
-		for (ListModeVo entity : data) {
-			newData.add(requestComments(entity));
+		List<ListModeVo> data = (List<ListModeVo>)NetUtil.get(vo);
+		if(data != null){
+			for (ListModeVo entity : data) {
+				newData.add(requestComments(entity));
+			}
 		}
 		return newData;
 	}

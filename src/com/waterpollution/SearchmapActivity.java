@@ -65,6 +65,7 @@ public class SearchmapActivity extends BaseActivity  implements OnDoubleTapListe
 
 			@Override
 			public void ChangeAct(int Type) {
+				if (myMapManage.complaintinfo==null) return;
 				 Intent nt = new Intent(SearchmapActivity.this, NewComplaintActivity.class);
 				 Bundle bundle = new Bundle();
 				 ComplaintEntity info = myMapManage.complaintinfo;
@@ -103,6 +104,7 @@ public class SearchmapActivity extends BaseActivity  implements OnDoubleTapListe
 			mMapView=(MapView)findViewById(R.id.bmapsView);
 			myMapManage.SetMapView(mMapView,new  OnChangeActListenner());
 	        myMapManage.inidata(null,false,null);
+	        myMapManage.AddNodeSearch(0);
 		}
 		@Override
 		protected void onDestroy(){

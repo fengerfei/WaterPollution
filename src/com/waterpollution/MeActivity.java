@@ -66,6 +66,9 @@ public class MeActivity extends BaseActivity {
 		setHeadRightText("");
 		if (application.mbProxy.isOauth()){
 			userInfo = application.mbProxy.getUserInfo();
+			if (userInfo==null){
+				return;
+			}
 			try {
 				user_nick.setText(userInfo.getString("WPnick"));
 				Drawable cachedImage;

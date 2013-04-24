@@ -5,6 +5,7 @@ import com.waterpollution.maps.MyMapManager;
 import com.waterpollution.util.Constant;
 import com.waterpollution.vo.ComplaintEntity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 
 import android.os.Bundle;
@@ -14,6 +15,7 @@ import android.view.GestureDetector.OnDoubleTapListener;
 import android.view.GestureDetector.OnGestureListener;
 import android.view.View.OnLongClickListener;
 import android.view.View.OnTouchListener;
+
 import com.waterpollution.application.WPApplication;
 
 import com.baidu.location.BDLocation;
@@ -39,7 +41,7 @@ public class HomeActivity extends BaseActivity implements OnDoubleTapListener, O
     public TextView textcontent = null;
     public TextView textclose = null;
     public TextView textcllocation = null;
-    
+    ProgressDialog mpDialog;
     public OnLongClickListener longClcikListener = new OnLongClickListener(){
     	
 		@Override
@@ -122,8 +124,38 @@ public class HomeActivity extends BaseActivity implements OnDoubleTapListener, O
 			mMapView=(MapView)findViewById(R.id.bmapsView);
 			myMapManage.tvCount = textsaynosum;
 			myMapManage.SetMapView(mMapView,new  OnChangeActListenner());
-	        myMapManage.inidata(TouchListener,true,longClcikListener);		
-		}		
+			
+	        //myMapManage.inidata(TouchListener,true,longClcikListener);
+		
+			
+				mpDialog = new ProgressDialog(HomeActivity.this);
+				mpDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);//设置风格为圆形进度条  
+				mpDialog.setTitle(getString(R.string.loadTitle));//设置标题  
+				mpDialog.setMessage(getString(R.string.LoadContent));  
+				mpDialog.setIndeterminate(false);//设置进度条是否为不明确  
+				mpDialog.setCancelable(false);//设置进度条是否可以按退回键取消 
+				mpDialog.show();  
+				new Thread(){  
+	                public void run(){  
+	                	try{
+	                		
+	                	
+	                    try{  
+	                    	myMapManage.inidata(TouchListener,true,longClcikListener);
+
+	                    }catch(Exception ex){  
+	                    	ex.printStackTrace();
+	                    }
+	                	}
+	                	finally{
+	                    	mpDialog.dismiss();	                		
+	                	}
+	                }  
+	            }.start();  
+	            
+	            myMapManage.AddNodeSearch(1);
+			}			
+	
 	}
 	@Override	
 	protected void onHeadSatelliteButton(View v) {

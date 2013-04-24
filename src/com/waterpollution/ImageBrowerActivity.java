@@ -34,14 +34,13 @@ public class ImageBrowerActivity extends BaseActivity {
 		selectedBottomTab(Constant.HOME);
 	}
 
-	@SuppressWarnings("deprecation")
 	@Override
 	protected void processLogic() {
 		imageURL = getIntent().getExtras().getString(ImageBrowerActivity.INTENTIMAGEURL);
 		bitimage = (Bitmap) getIntent().getParcelableExtra(ImageBrowerActivity.INTENTBITMAP);
 		if (imageURL!=null){
 		try {
-			ivBrower.setBackgroundDrawable(ImageUtil.getDrawableFromUrl(imageURL));
+			ivBrower.setImageDrawable(ImageUtil.getDrawableFromUrl(imageURL));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}}

@@ -150,7 +150,7 @@ public class NewComplaintActivity extends BaseActivity {
 				"&user_id=" + application.mbProxy.getUserId()+
 				"&nick_name=" + NetUtil.StringToUnicode(application.mbProxy.getNickName())+
 				"&object_name="+NetUtil.StringToUnicode(title)+
-				"&object_type="+ "hs"+
+				"&object_type="+ "0"+
 				"&address=" +NetUtil.StringToUnicode(addressInfo)+
 				"&longitude="+ longitude+
 				"&latitude="+latitude+
@@ -289,6 +289,12 @@ public class NewComplaintActivity extends BaseActivity {
 			public void onItemSelected(AdapterView<?> arg0, View arg1,
 					int arg2, long arg3) {
 				if (arg2>0){
+					List<ComplaintEntity> complaintEntitylist = application.complaintEntitylist;
+					addressInfo = complaintEntitylist.get(arg2).address;
+					latitude =  Float.toString( complaintEntitylist.get(arg2).latitude);
+					longitude = Float.toString( complaintEntitylist.get(arg2).longitude);
+					cityName =  complaintEntitylist.get(arg2).city_name;
+					complaintAddr.setText(addressInfo);
 					complaintName.setText(spnRange.getSelectedItem().toString());
 				}
 			}

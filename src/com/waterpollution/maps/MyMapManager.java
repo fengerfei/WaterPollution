@@ -1,11 +1,11 @@
 package com.waterpollution.maps;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -39,7 +39,6 @@ import com.baidu.mapapi.map.OverlayItem;
 import com.baidu.mapapi.map.PopupClickListener;
 import com.baidu.mapapi.map.PopupOverlay;
 import com.baidu.mapapi.map.Symbol;
-import com.baidu.mapapi.map.Symbol.Color;
 import com.baidu.mapapi.search.MKAddrInfo;
 import com.baidu.mapapi.search.MKBusLineResult;
 import com.baidu.mapapi.search.MKDrivingRouteResult;
@@ -120,11 +119,13 @@ public class MyMapManager {
 	}
 	
 	public void ReGetRound(){
+		if (mMapView == null) return;
         GetRoundList(locData.latitude,locData.longitude,null,0);
         mMapView.refresh();
         MoveToLocData();		
 	}
 	public void ShowSatellite(Boolean show){
+		if (mMapView == null) return;
 		mMapView.setSatellite(show);
 	}
 	public void SetMapView(MapView map,ChangeActListener Listenner){
@@ -139,6 +140,7 @@ public class MyMapManager {
 
 	}
 	private void iniLocation(){
+		if (mMapView == null) return;
 	       mLocClient = wpapp.mLocationClient;
 	        myListener = new MyLocationListenner();
 	        
@@ -175,6 +177,7 @@ public class MyMapManager {
 			mMapView.refresh();		
 	}
 	public void inidata(OnTouchListener TouchListener,boolean Location,OnLongClickListener longListener ){
+		if (mMapView == null) return;
 		int type =0;
 		if (Location){
 			iniLocation();
@@ -192,7 +195,11 @@ public class MyMapManager {
         //用给定的经纬度构造一个GeoPoint，单位是微度 (�?* 1E6)
        mMapController.setCenter(point); //设置地图中心�?
        mMapController.setZoom(14); //设置地图zoom级别 	
-       nodesearch = new NodeSearch(type);
+       //AddNodeSearch();
+       
+	}
+	public void AddNodeSearch(int type){
+		nodesearch = new NodeSearch(type);
 	}
 	public void AddressSearch(String Addr){
 		nodesearch.AddrSearch(Addr);

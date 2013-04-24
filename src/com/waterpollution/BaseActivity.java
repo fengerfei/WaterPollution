@@ -367,8 +367,8 @@ public abstract class BaseActivity extends Activity implements OnClickListener {
 	
 	public void popupLogin(){
 		new AlertDialog.Builder(this) 
-        .setTitle("登入污水地图")
-        .setItems(new String[] {"用新浪微博登入","用腾讯微博登入"}, new DialogInterface.OnClickListener() {
+        .setTitle(getString(R.string.loginTitle))
+        .setItems(getResources().getStringArray(R.array.listloginPopup), new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
             	 switch (which) {
                  case 0:

@@ -243,6 +243,7 @@ public class ComplaintDetailActivity extends BaseActivity {
 			ListModeVo vo = (ListModeVo)getIntent().getExtras().getSerializable("listModeVo");
 			complaintName = vo.getTitle();
 		}
+		complaintName=(complaintName==null)?"":complaintName;
 		String  httpcon ="http://42.120.23.245/Iphone1.2/index.php?m=compliant&a=byread"+
 						 "&object_name="+ NetUtil.StringToUnicode(complaintName)+
 						 "&pi="+"0"+
@@ -313,7 +314,7 @@ public class ComplaintDetailActivity extends BaseActivity {
 			ImageView view = new ImageView(this.mContext); 
 			Drawable bitmap = imageList.get(position);
 			//将ID告诉ImageView,它就能找到图片 
-			view.setBackgroundDrawable(bitmap);			
+			view.setImageDrawable(bitmap);			
 			view.setLayoutParams(new Gallery.LayoutParams(120,120)); 
 			view.setScaleType(ImageView.ScaleType.FIT_CENTER); 
 			return view; 

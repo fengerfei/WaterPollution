@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 public class ComplaintDetailAdapter extends BaseAdapter {
@@ -47,11 +48,11 @@ public class ComplaintDetailAdapter extends BaseAdapter {
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-		LinearLayout layout;
+		RelativeLayout layout;
 		if (convertView == null) {
-			layout = (LinearLayout) mInflater.inflate(R.layout.complaintdetail_item,null);
+			layout = (RelativeLayout) mInflater.inflate(R.layout.complaintdetail_item,null);
 		} else {
-			layout = (LinearLayout) convertView;
+			layout = (RelativeLayout) convertView;
 		}
 		final ComplaintInfo ci = mData.get(position);
 		TextView nickName = (TextView)layout.findViewById(R.id.textViewCommentusernick);

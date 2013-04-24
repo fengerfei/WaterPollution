@@ -31,10 +31,11 @@ public class CitymapActivity extends BaseActivity  implements OnDoubleTapListene
 		mMapView=(MapView)findViewById(R.id.bmapsView);
 		myMapManage.SetMapView(mMapView,new  OnChangeActListenner());
         myMapManage.inidata(null,false,null);
-        
+        myMapManage.AddNodeSearch(0);
         Bundle bundle = this.getIntent().getExtras();
         String city = bundle.getString("city_name");
         myMapManage.AddressSearch(city);
+        
      
         
 	}	
@@ -43,6 +44,7 @@ public class CitymapActivity extends BaseActivity  implements OnDoubleTapListene
 
 		@Override
 		public void ChangeAct(int Type) {
+			if (myMapManage.complaintinfo ==null) return;
 			 Intent nt = new Intent(CitymapActivity.this, NewComplaintActivity.class);
 			 Bundle bundle = new Bundle();
 			 ComplaintEntity info = myMapManage.complaintinfo;

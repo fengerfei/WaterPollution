@@ -151,10 +151,9 @@ public class NetUtil {
 	
 	//utf-8转码
 	public static String StringToUnicode(String s){
-		
 		String r ="";
 		try {
-			r = URLEncoder.encode(s,"utf-8");
+			r = URLEncoder.encode(s==null?"":s,"utf-8");
 		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

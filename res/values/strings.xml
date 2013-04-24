@@ -24,6 +24,11 @@
 	<string name="titleSetting">关于</string>
 	<string name="navLogin">登陆</string>
 	<string name="navLogout">注销</string>
+	<string name="loginTitle">登入污水地图</string>
+	<string-array name="listloginPopup"> 
+        <item>用新浪微博登入</item> 
+        <item>用腾讯微博登入</item> 
+    </string-array> 
 	<string name="about1">
 		污水地图是一款基于LBS由用户对水污
 		染源进行发现、举报、自由评论的移动社区应用。
