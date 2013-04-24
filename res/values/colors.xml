@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="clrGrey">#F6F6F6</color>
+    <color name="clrDardRed">#9f0017</color>
+    <color name="clrGreyText">#999999</color>
+    <color name="clrLightText">#FFFFFF</color>
+</resources>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+
+        <com.baidu.mapapi.map.MapView
+            android:id="@+id/bmapsView"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:clickable="true" >
+        </com.baidu.mapapi.map.MapView>
+
+        <TextView
+            android:id="@+id/textsaynosum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/saynosum"
+            android:gravity="center_vertical|center"
+            android:textColor="@color/clrLightText" />
+
+        <TextView
+            android:id="@+id/textcontent"
+            android:layout_width="150dp"
+            android:layout_height="20dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="18dp"
+            android:background="@drawable/content"
+            android:gravity="center_vertical|center"
+            android:text="@string/mapcontent"
+            android:textSize="12sp"
+            android:textColor="@color/clrGreyText" />
+
+        <TextView
+            android:id="@+id/textcllocation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/textsaynosum"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="60dp"
+            android:background="@drawable/cllocation"
+            android:gravity="center_vertical|center" />
+
+        <TextView
+            android:id="@+id/textclose"
+            android:layout_width="12dp"
+            android:layout_height="12dp"
+            android:layout_alignBottom="@+id/textcontent"
+            android:layout_alignRight="@+id/textcontent"
+            android:layout_marginBottom="4dp"
+            android:background="@drawable/close"
+            android:gravity="center_vertical|center" />
+
+    </RelativeLayout>
+           
+</LinearLayout>

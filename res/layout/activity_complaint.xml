@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical">
+   <RelativeLayout
+       android:layout_width="fill_parent"
+       android:layout_height="wrap_content"
+        >
+       <TextView
+       android:id="@+id/textViewName"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:text="@string/complaintName"
+       android:layout_marginLeft="20dp"
+       android:layout_centerVertical="true" />
+
+<Spinner
+    android:id="@+id/spnRange"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignBottom="@+id/editTextName"
+    android:layout_alignRight="@+id/editTextName"
+    android:layout_toRightOf="@+id/textViewName"
+    android:spinnerMode="dialog" >
+
+    </Spinner>       
+       <EditText
+       android:id="@+id/editTextName"
+       android:layout_width="fill_parent"
+       android:layout_height="wrap_content"
+       android:layout_marginRight="20dp"
+       android:layout_toRightOf="@+id/textViewName"
+       android:hint="@string/complaintNameHint">                 
+       <requestFocus />
+   	</EditText>
+   </RelativeLayout>
+   <RelativeLayout
+       android:layout_width="fill_parent"
+       android:layout_height="wrap_content" >
+       <TextView
+       android:id="@+id/textViewAddr"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_centerVertical="true"
+       android:layout_marginLeft="20dp"
+       android:text="@string/complaintAddr"/>
+       <EditText
+       android:id="@+id/editTextAddr"
+       android:layout_width="fill_parent"
+       android:layout_height="wrap_content"
+       android:layout_marginRight="20dp"
+       android:layout_toRightOf="@+id/textViewAddr"
+       android:hint="@string/complaintAddrHint">                 
+       <requestFocus />
+   	</EditText>
+   </RelativeLayout>
+
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:orientation="vertical" >
+       <EditText
+           android:id="@+id/editTextWeiboContent"
+           android:layout_width="fill_parent"
+           android:layout_height="wrap_content"
+           android:ems="10"
+           android:inputType="textMultiLine" 
+           android:maxLength="140"
+           android:minHeight="140dp"/>
+
+       <RelativeLayout
+           android:layout_width="fill_parent"
+           android:layout_height="wrap_content" >
+
+           <TextView
+               android:id="@+id/textViewTakePhoto"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_marginLeft="20dp"
+               android:layout_marginRight="10dp"
+               android:layout_centerVertical="true"
+               android:gravity="center_vertical|center" 
+               android:background="@drawable/photoind" />
+           <TextView
+               android:id="@+id/textViewChoosePhoto"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_marginLeft="10dp"
+               android:layout_toRightOf="@+id/textViewTakePhoto"
+               android:layout_centerVertical="true" 
+               android:gravity="center_vertical|center"
+               android:background="@drawable/pic"/>
+           
+           <TextView
+               android:id="@+id/textViewAsyWeibo"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_centerVertical="true"
+               android:layout_alignParentRight="true"
+               android:layout_marginRight="20dp"
+                android:layout_marginLeft="5dp"
+               android:text="@string/complaintAsysWeibo"/>
+           <TextView
+               android:id="@+id/textViewChkAsy"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_marginLeft="10dp"
+               android:layout_toLeftOf="@+id/textViewAsyWeibo"
+               android:layout_centerVertical="true" 
+               android:gravity="center_vertical|center"
+               android:background="@drawable/sendweibo"/>
+       </RelativeLayout>
+   </LinearLayout>
+<!-- Login progress -->
+	    <LinearLayout
+	        android:id="@+id/llprogressBar"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_gravity="center"
+	        android:gravity="center_horizontal"
+	        android:orientation="vertical"
+	        android:visibility="gone" >
+	
+	        <ProgressBar
+	            style="?android:attr/progressBarStyleLarge"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_marginBottom="8dp" />
+	
+	        <TextView
+	            android:id="@+id/login_status_message"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_marginBottom="16dp"
+	            android:fontFamily="sans-serif-light"
+	            android:text="@string/loadTitle"
+	            android:textAppearance="?android:attr/textAppearanceMedium" />
+	    </LinearLayout>
+   <LinearLayout
+       android:layout_width="fill_parent"
+       android:layout_height="fill_parent"
+       android:orientation="vertical" >
+       <ImageView
+           android:id="@+id/imageViewShow"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:contentDescription="@string/complaintWeiboPic"/>
+   </LinearLayout>
+
+</LinearLayout>
