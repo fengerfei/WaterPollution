@@ -35,6 +35,7 @@ import android.widget.Toast;
 @SuppressWarnings("deprecation")
 public class ComplaintDetailActivity extends BaseActivity {
 	private String complaintName;
+	private String cityName;
 	private List<Drawable> complaintList;
 	private ComplaintEntity complaintEntity;
 	
@@ -61,10 +62,12 @@ public class ComplaintDetailActivity extends BaseActivity {
 		switch(v.getId()){
 		case R.id.textViewReComplaint:
 			Intent intent = new Intent(ComplaintDetailActivity.this,NewComplaintActivity.class);
+			intent.putExtra("title", complaintEntity.title);
 			intent.putExtra("address", complaintEntity.address);
 			intent.putExtra("Latitude", complaintEntity.latitude);
 			intent.putExtra("Longitude", complaintEntity.longitude);
-			intent.putExtra("city_name", complaintEntity.city_name);
+			intent.putExtra("city_name", cityName);
+			intent.putExtra("ReComplaint", true);
 			startActivity(intent);
 			break;
 		}
@@ -239,6 +242,13 @@ public class ComplaintDetailActivity extends BaseActivity {
 	
 	private void getComplaintDetail(){
 		complaintName = getIntent().getExtras().getString("title");
+		cityName = getIntent().getExtras().getString("city_name");
+		if (cityName==null){
+			cityName = application.CityName;
+		}
+		if (cityName.equals("")){
+			cityName = application.CityName;
+		}
 		if (complaintName == null){
 			ListModeVo vo = (ListModeVo)getIntent().getExtras().getSerializable("listModeVo");
 			complaintName = vo.getTitle();

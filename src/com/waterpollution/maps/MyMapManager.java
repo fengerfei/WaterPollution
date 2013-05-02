@@ -79,6 +79,7 @@ public class MyMapManager {
 	public MyLocationListenner myListener = new MyLocationListenner();
 	public ComplaintEntity complaintinfo =null;
 	public TextView tvCount = null;
+	public String NodeCityName = "";
 	public List<ComplaintEntity> complaintEntitylist =null;
 	//定位修正处理 ---原则上是根据GSP定位和百度的定位差来�?
 	
@@ -328,7 +329,7 @@ public class MyMapManager {
         public OverlayListPos(Drawable marker,Context context,ChangeActListener listener){
             super(marker);
             this.mContext = context; 
-
+            
             changeactlistener = listener;
             try {
             amap = BitmapFactory.decodeStream(context.getAssets().open("Bmarker11.png")).copy(Bitmap.Config.ARGB_8888, true);
@@ -358,11 +359,15 @@ public class MyMapManager {
                     		changeactlistener.ChangeAct(1);
                     		
                     	}else{
-                    		
+                    		if (NodeCityName ==""){
+                    			Toast.makeText(mContext,"举报点信息读取中。", Toast.LENGTH_SHORT).show();
+                    			return;
+                    		}
                     		//举报详情还未�?
                     		Intent ent =new Intent(mContext, ComplaintDetailActivity.class);
                     		Bundle bundle = new Bundle();
-               			 	bundle.putString("title",CurrItem.getTitle());               			 
+               			 	bundle.putString("title",CurrItem.getTitle());  
+               			 	bundle.putString("city_name",NodeCityName);
                			 	ent.putExtras(bundle);                    		
                			 mContext.startActivity(ent);
                     		
@@ -403,6 +408,7 @@ public class MyMapManager {
              	}
              	else{
              		bmps[0] =aminmap;
+             		nodesearch.GetCityInfo(CurrItem.getPoint());
              	}
              		
              	//b =changeSize(b,2);
@@ -534,6 +540,7 @@ public class MyMapManager {
 		private MKSearchListener listener;
 		private OverlayListPos currolp;
 		private GeoPoint p;
+		private boolean GetCity = false;
 		public NodeSearch(int type){
 	        mSearch = new MKSearch();
 	        if (type ==1){
@@ -561,6 +568,15 @@ public class MyMapManager {
 				r= r-1;
 			}
 		}
+		public void GetCityInfo(GeoPoint ptGeoPoint){
+			p = ptGeoPoint;
+			GetCity = true;
+			int r =mSearch.reverseGeocode(ptGeoPoint);			
+			if (r>0){
+				r= r-1;
+			}			
+		}
+		
 		public class CommListener implements MKSearchListener{
 
 			@Override
@@ -621,6 +637,12 @@ public class MyMapManager {
 			@Override
 			public void onGetAddrResult(MKAddrInfo arg0, int arg1) {
 				// TODO Auto-generated method stub
+				if (GetCity && arg0 != null && arg0.type ==MKAddrInfo.MK_REVERSEGEOCODE )
+				{
+					NodeCityName = arg0.addressComponents.city; 
+					GetCity = false;
+					return;
+				}
 				if (arg1 != 0) {
 					if (MKres.getSuggestionNum() <=rescount) {
 						 MKres = null;
@@ -680,11 +702,22 @@ public class MyMapManager {
 				if (arg1 != 0) {
 					return;
 				}
+				if (GetCity && arg0 != null && arg0.type ==MKAddrInfo.MK_REVERSEGEOCODE )
+				{
+					NodeCityName = arg0.addressComponents.city; 
+					GetCity = false;
+					return;
+				}				
 			    Drawable marker = newnode;	
 			    if (complaintinfo==null){
 			    	complaintinfo = new ComplaintEntity();
 			    }
         		complaintinfo.address =arg0.strAddr;
+        		
+        		if (arg0.type ==MKAddrInfo.MK_REVERSEGEOCODE )
+        		{        			
+        			complaintinfo.city_name = arg0.addressComponents.city;        			
+        		}
         				
 			   	OverlayItem item= new OverlayItem(p,"点击输入举报内容",arg0.strAddr);
 
@@ -749,6 +782,7 @@ public class MyMapManager {
 			    }            	
             	
 			    complaintinfo.city_name = location.getCity();
+			    wpapp.CityName =complaintinfo.city_name;
             	
             //得到周围点列�?
             GetRoundList(locData.latitude,locData.longitude,offset,0);

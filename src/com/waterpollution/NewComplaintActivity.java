@@ -143,7 +143,10 @@ public class NewComplaintActivity extends BaseActivity {
 	}
 	
 	private void sendtoServer(){
-		
+		String cityN= cityName;
+		if (cityName.length()>2){
+			cityN = cityName.replace("市","");
+		}
 		application.mbProxy.getUserInfo();
 		String  httpcon ="http://42.120.23.245/Iphone1.2/index.php?m=compliant&a=insert&" +
 				"id="+java.util.UUID.randomUUID().toString() +
@@ -155,7 +158,7 @@ public class NewComplaintActivity extends BaseActivity {
 				"&longitude="+ longitude+
 				"&latitude="+latitude+
 				"&content="+NetUtil.StringToUnicode(weiboInfo)+
-				"&city_name="+NetUtil.StringToUnicode(cityName);
+				"&city_name="+NetUtil.StringToUnicode(cityN);
 		
 
 		String s ="";
@@ -253,26 +256,30 @@ public class NewComplaintActivity extends BaseActivity {
 		addressInfo = inParam.getString("address");
 		latitude =  Float.toString(inParam.getFloat("Latitude"));
 		longitude = Float.toString(inParam.getFloat("Longitude"));
+		
 		cityName = inParam.getString("city_name");
+		cityName = (cityName==null)?"":cityName;
+		popSpinner = inParam.getBoolean("ReComplaint",false);
+		title ="";
+		if (inParam.getString("title") != null){
+		title = inParam.getString("title");
+		}
+		
+		if (popSpinner){
+			complaintName.setText(title);
+		}
 		complaintAddr.setText(addressInfo);
 		setHeadRightText(R.string.complaintCommit);
-		List<String> CharS = new ArrayList<String>();
-		List<ComplaintEntity> complaintEntitylist = application.complaintEntitylist;
 		
+		List<ComplaintEntity> complaintEntitylist = application.complaintEntitylist;
+		List<String> CharS = new ArrayList<String>();
 		CharS.add("新增");
 		for(ComplaintEntity entity: complaintEntitylist){
 			CharS.add(entity.title);
         } 		
-		
-		ArrayAdapter<String> adapter =  new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,CharS);		
-		
-//		ArrayAdapter.createFromResource(context, textArrayResId, textViewResId) 
-				
-//				ArrayAdapter.createFromResource(this, 
-//				R.array.listModeData, android.R.layout.simple_spinner_item); 
+		ArrayAdapter<String> adapter =  new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,CharS);	
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item); 
 		spnRange.setAdapter(adapter);
-		
 	}
 
 	/* (non-Javadoc)
@@ -294,6 +301,7 @@ public class NewComplaintActivity extends BaseActivity {
 					latitude =  Float.toString( complaintEntitylist.get(arg2).latitude);
 					longitude = Float.toString( complaintEntitylist.get(arg2).longitude);
 					cityName =  complaintEntitylist.get(arg2).city_name;
+					cityName = (cityName==null)?"":cityName;
 					complaintAddr.setText(addressInfo);
 					complaintName.setText(spnRange.getSelectedItem().toString());
 				}

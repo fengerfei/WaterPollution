@@ -41,7 +41,7 @@ public class WPApplication extends Application {
 	public MapRoundList mapRoundList = new MapRoundList((WPApplication)this);
 	private int leftButtonIndex = Constant.LeftButton.BACK;
     public static final String strKey = "2CAC9D5DA871DB230B49AF3F1E7568AA19DE88B0";
-	
+	public String CityName;
 
 	@Override
 	public void onCreate() {
@@ -51,7 +51,7 @@ public class WPApplication extends Application {
 		if (myListener != null) {
 			mLocationClient.registerLocationListener(myListener);
 		} // ע�������
-
+		
 		initCacheDirPath();
 		getConfig();
 	}

@@ -42,6 +42,7 @@ public class RankingActivity extends BaseActivity {
 
 	@Override
 	protected void processLogic() {
+		setHeadRightText("");
 		showProgressDialog();
 		RequestVo vo = new RequestVo();
 		vo.requestUrl = R.string.url;
@@ -71,6 +72,7 @@ public class RankingActivity extends BaseActivity {
 
 	@Override
 	protected void setListener() {
+		headRightBtn.setOnClickListener(this);	
 		rankingListView.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
@@ -86,8 +88,11 @@ public class RankingActivity extends BaseActivity {
 
 	@Override
 	public void onClick(View v) {
-		// TODO Auto-generated method stub
-		
+		switch(v.getId()){
+		case R.id.head_right:
+			initView();
+			break;			
+		}
 	}
 
 }

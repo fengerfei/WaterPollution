@@ -27,6 +27,7 @@ public class ComplaintParser {
 		while (eventType != XmlPullParser.END_DOCUMENT) {
 			switch (eventType) {
 			case XmlPullParser.START_DOCUMENT:
+				
 				break;	
 			case XmlPullParser.START_TAG:
 				if (parser.getName().equals("complaintEntity")) {

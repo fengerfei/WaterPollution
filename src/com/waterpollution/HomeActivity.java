@@ -23,6 +23,7 @@ import com.baidu.location.BDNotifyListener;
 import com.baidu.mapapi.map.MapView;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class HomeActivity extends BaseActivity implements OnDoubleTapListener, OnGestureListener{
 	//地图相关
@@ -230,8 +231,14 @@ public class HomeActivity extends BaseActivity implements OnDoubleTapListener, O
 		@Override
 		public void ChangeAct(int Type) {
 			 Intent nt = new Intent(HomeActivity.this, NewComplaintActivity.class);
+			 
 			 Bundle bundle = new Bundle();
 			 ComplaintEntity info = myMapManage.complaintinfo;
+	    		if (info.city_name ==""){
+	    			Toast.makeText(HomeActivity.this,"举报点信息读取中。", Toast.LENGTH_SHORT).show();
+	    			return;
+	    		}
+			 
 			 bundle.putString("address",info.address);
 			 bundle.putFloat("Longitude",info.longitude);
 			 bundle.putFloat("Latitude",info.latitude);
